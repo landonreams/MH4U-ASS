@@ -254,3 +254,6 @@ All
 
 #Format string for showing a skill with the number of skill points required
 %1 (+%2)
+
+#Designates that a gem belongs on the torso
+(on Torso)

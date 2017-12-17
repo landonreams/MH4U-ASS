@@ -309,6 +309,7 @@ ref struct StringTable
 		HRGNum,
 		HRAll,
 		SkillPointsRequiredFormat,
+		DecorationInTorso,
 		NumStrings
 	};
 };

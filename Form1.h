@@ -11,6 +11,7 @@
 #include "SkillHelp.h"
 #include "NumericUpDownHR.h"
 #include "PreviewImage.h"
+#include "SetDesigner.h"
 
 namespace MH4GASS 
 {
@@ -185,6 +186,7 @@ namespace MH4GASS
 		List_t< ThreadSearchData^ > worker_data;
 		unsigned finished_workers, total_progress, worker_start_index, num_updates;
 private: System::Windows::Forms::ToolStripMenuItem^  mnuDonate;
+private: System::Windows::Forms::ToolStripMenuItem^  setDesignerToolStripMenuItem;
 
 
 private: System::Windows::Forms::ToolStripMenuItem^  mnuAllowGunnerHelms;
@@ -826,6 +828,8 @@ private: System::Windows::Forms::ToolStripMenuItem^  mnuAllowGunnerHelms;
 			this->nudWeaponSlots = (gcnew System::Windows::Forms::NumericUpDown());
 			this->lblElder = (gcnew System::Windows::Forms::Label());
 			this->lblSlots = (gcnew System::Windows::Forms::Label());
+			this->nudHR = (gcnew MH4GASS::NumericUpDownHR());
+			this->nudElder = (gcnew MH4GASS::NumericUpDownVE());
 			this->lblHR = (gcnew System::Windows::Forms::Label());
 			this->grpBSkills = (gcnew System::Windows::Forms::GroupBox());
 			this->btnSearch = (gcnew System::Windows::Forms::Button());
@@ -883,10 +887,11 @@ private: System::Windows::Forms::ToolStripMenuItem^  mnuAllowGunnerHelms;
 			this->btnEquipment = (gcnew System::Windows::Forms::Button());
 			this->cmbCharmSelect = (gcnew System::Windows::Forms::ComboBox());
 			this->cmsCharms = (gcnew System::Windows::Forms::ContextMenuStrip(this->components));
-			this->nudHR = (gcnew MH4GASS::NumericUpDownHR());
-			this->nudElder = (gcnew MH4GASS::NumericUpDownVE());
+			this->setDesignerToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->groupBox1->SuspendLayout();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudWeaponSlots))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->nudWeaponSlots))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->nudHR))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->nudElder))->BeginInit();
 			this->groupBox4->SuspendLayout();
 			this->grpResults->SuspendLayout();
 			this->menuStrip1->SuspendLayout();
@@ -896,8 +901,6 @@ private: System::Windows::Forms::ToolStripMenuItem^  mnuAllowGunnerHelms;
 			this->tabGunner->SuspendLayout();
 			this->grpSortFilter->SuspendLayout();
 			this->grpCharms->SuspendLayout();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudHR))->BeginInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudElder))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// groupBox1
@@ -919,7 +922,7 @@ private: System::Windows::Forms::ToolStripMenuItem^  mnuAllowGunnerHelms;
 			this->nudWeaponSlots->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Right));
 			this->nudWeaponSlots->BackColor = System::Drawing::SystemColors::Control;
 			this->nudWeaponSlots->Location = System::Drawing::Point(109, 80);
-			this->nudWeaponSlots->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {3, 0, 0, 0});
+			this->nudWeaponSlots->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 3, 0, 0, 0 });
 			this->nudWeaponSlots->Name = L"nudWeaponSlots";
 			this->nudWeaponSlots->Size = System::Drawing::Size(35, 20);
 			this->nudWeaponSlots->TabIndex = 5;
@@ -943,6 +946,32 @@ private: System::Windows::Forms::ToolStripMenuItem^  mnuAllowGunnerHelms;
 			this->lblSlots->TabIndex = 4;
 			this->lblSlots->Text = L"Max Weapon Slots";
 			// 
+			// nudHR
+			// 
+			this->nudHR->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Right));
+			this->nudHR->BackColor = System::Drawing::SystemColors::Control;
+			this->nudHR->Location = System::Drawing::Point(100, 20);
+			this->nudHR->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 12, 0, 0, 0 });
+			this->nudHR->Minimum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 1, 0, 0, 0 });
+			this->nudHR->Name = L"nudHR";
+			this->nudHR->Size = System::Drawing::Size(44, 20);
+			this->nudHR->TabIndex = 1;
+			this->nudHR->TextAlign = System::Windows::Forms::HorizontalAlignment::Center;
+			this->nudHR->Value = System::Decimal(gcnew cli::array< System::Int32 >(4) { 12, 0, 0, 0 });
+			// 
+			// nudElder
+			// 
+			this->nudElder->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Right));
+			this->nudElder->BackColor = System::Drawing::SystemColors::Control;
+			this->nudElder->Location = System::Drawing::Point(100, 50);
+			this->nudElder->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 10, 0, 0, 0 });
+			this->nudElder->Minimum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 1, 0, 0, 0 });
+			this->nudElder->Name = L"nudElder";
+			this->nudElder->Size = System::Drawing::Size(44, 20);
+			this->nudElder->TabIndex = 3;
+			this->nudElder->TextAlign = System::Windows::Forms::HorizontalAlignment::Center;
+			this->nudElder->Value = System::Decimal(gcnew cli::array< System::Int32 >(4) { 10, 0, 0, 0 });
+			// 
 			// lblHR
 			// 
 			this->lblHR->AutoSize = true;
@@ -954,7 +983,7 @@ private: System::Windows::Forms::ToolStripMenuItem^  mnuAllowGunnerHelms;
 			// 
 			// grpBSkills
 			// 
-			this->grpBSkills->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom) 
+			this->grpBSkills->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
 				| System::Windows::Forms::AnchorStyles::Left));
 			this->grpBSkills->Location = System::Drawing::Point(6, 8);
 			this->grpBSkills->Name = L"grpBSkills";
@@ -983,11 +1012,11 @@ private: System::Windows::Forms::ToolStripMenuItem^  mnuAllowGunnerHelms;
 			// 
 			// txtSolutions
 			// 
-			this->txtSolutions->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom) 
-				| System::Windows::Forms::AnchorStyles::Left) 
+			this->txtSolutions->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+				| System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
 			this->txtSolutions->ContextMenuStrip = this->cmsSolutions;
-			this->txtSolutions->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, 
+			this->txtSolutions->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->txtSolutions->Location = System::Drawing::Point(6, 16);
 			this->txtSolutions->Name = L"txtSolutions";
@@ -1037,8 +1066,8 @@ private: System::Windows::Forms::ToolStripMenuItem^  mnuAllowGunnerHelms;
 			// 
 			// grpResults
 			// 
-			this->grpResults->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom) 
-				| System::Windows::Forms::AnchorStyles::Left) 
+			this->grpResults->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
+				| System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
 			this->grpResults->Controls->Add(this->txtSolutions);
 			this->grpResults->Location = System::Drawing::Point(373, 27);
@@ -1060,7 +1089,7 @@ private: System::Windows::Forms::ToolStripMenuItem^  mnuAllowGunnerHelms;
 			// 
 			// grpBSkillFilters
 			// 
-			this->grpBSkillFilters->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom) 
+			this->grpBSkillFilters->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
 				| System::Windows::Forms::AnchorStyles::Left));
 			this->grpBSkillFilters->Location = System::Drawing::Point(195, 8);
 			this->grpBSkillFilters->Name = L"grpBSkillFilters";
@@ -1071,8 +1100,10 @@ private: System::Windows::Forms::ToolStripMenuItem^  mnuAllowGunnerHelms;
 			// 
 			// menuStrip1
 			// 
-			this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(4) {this->mnuFile, this->mnuOptions, 
-				this->mnuLanguage, this->mnuHelp});
+			this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(5) {
+				this->mnuFile, this->mnuOptions,
+					this->mnuLanguage, this->mnuHelp, this->setDesignerToolStripMenuItem
+			});
 			this->menuStrip1->Location = System::Drawing::Point(0, 0);
 			this->menuStrip1->Name = L"menuStrip1";
 			this->menuStrip1->Size = System::Drawing::Size(729, 24);
@@ -1081,8 +1112,10 @@ private: System::Windows::Forms::ToolStripMenuItem^  mnuAllowGunnerHelms;
 			// 
 			// mnuFile
 			// 
-			this->mnuFile->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(3) {this->mnuLoadData, 
-				this->mnuSaveData, this->mnuExit});
+			this->mnuFile->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(3) {
+				this->mnuLoadData,
+					this->mnuSaveData, this->mnuExit
+			});
 			this->mnuFile->Name = L"mnuFile";
 			this->mnuFile->Size = System::Drawing::Size(37, 20);
 			this->mnuFile->Text = L"&File";
@@ -1110,10 +1143,12 @@ private: System::Windows::Forms::ToolStripMenuItem^  mnuAllowGunnerHelms;
 			// 
 			// mnuOptions
 			// 
-			this->mnuOptions->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(16) {this->mnuClearSettings, 
-				this->toolStripSeparator1, this->mnuAllowBadSkills, this->mnuAllowArena, this->mnuAllowEventArmor, this->mnuAllowExcavatedArmor, 
-				this->mnuAllowExcavatedWeapons, this->mnuAllowJapaneseOnlyDLC, this->mnuAllowLowerTierArmor, this->mnuAllowGunnerHelms, this->toolStripSeparator2, 
-				this->mnuMaxResults, this->mnuPrintDecoNames, this->mnuSortSkillsAlphabetically, this->mnuShowRequiredSkillPoints, this->mnuSpendSpareSlots});
+			this->mnuOptions->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(16) {
+				this->mnuClearSettings,
+					this->toolStripSeparator1, this->mnuAllowBadSkills, this->mnuAllowArena, this->mnuAllowEventArmor, this->mnuAllowExcavatedArmor,
+					this->mnuAllowExcavatedWeapons, this->mnuAllowJapaneseOnlyDLC, this->mnuAllowLowerTierArmor, this->mnuAllowGunnerHelms, this->toolStripSeparator2,
+					this->mnuMaxResults, this->mnuPrintDecoNames, this->mnuSortSkillsAlphabetically, this->mnuShowRequiredSkillPoints, this->mnuSpendSpareSlots
+			});
 			this->mnuOptions->Name = L"mnuOptions";
 			this->mnuOptions->Size = System::Drawing::Size(61, 20);
 			this->mnuOptions->Text = L"&Options";
@@ -1207,7 +1242,7 @@ private: System::Windows::Forms::ToolStripMenuItem^  mnuAllowGunnerHelms;
 			// 
 			// mnuMaxResults
 			// 
-			this->mnuMaxResults->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) {this->mnuNumResults});
+			this->mnuMaxResults->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->mnuNumResults });
 			this->mnuMaxResults->Name = L"mnuMaxResults";
 			this->mnuMaxResults->Size = System::Drawing::Size(238, 22);
 			this->mnuMaxResults->Text = L"&Max Results";
@@ -1261,8 +1296,10 @@ private: System::Windows::Forms::ToolStripMenuItem^  mnuAllowGunnerHelms;
 			// 
 			// mnuHelp
 			// 
-			this->mnuHelp->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(4) {this->mnuSkillHelp, 
-				this->mnuDonate, this->mnuCheckForUpdates, this->mnuAbout});
+			this->mnuHelp->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(4) {
+				this->mnuSkillHelp,
+					this->mnuDonate, this->mnuCheckForUpdates, this->mnuAbout
+			});
 			this->mnuHelp->Name = L"mnuHelp";
 			this->mnuHelp->Size = System::Drawing::Size(44, 20);
 			this->mnuHelp->Text = L"&Help";
@@ -1276,7 +1313,7 @@ private: System::Windows::Forms::ToolStripMenuItem^  mnuAllowGunnerHelms;
 			// 
 			// mnuDonate
 			// 
-			this->mnuDonate->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9, System::Drawing::FontStyle::Underline, System::Drawing::GraphicsUnit::Point, 
+			this->mnuDonate->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9, System::Drawing::FontStyle::Underline, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->mnuDonate->ForeColor = System::Drawing::SystemColors::HotTrack;
 			this->mnuDonate->Name = L"mnuDonate";
@@ -1286,7 +1323,7 @@ private: System::Windows::Forms::ToolStripMenuItem^  mnuAllowGunnerHelms;
 			// 
 			// mnuCheckForUpdates
 			// 
-			this->mnuCheckForUpdates->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9, System::Drawing::FontStyle::Underline, System::Drawing::GraphicsUnit::Point, 
+			this->mnuCheckForUpdates->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9, System::Drawing::FontStyle::Underline, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->mnuCheckForUpdates->ForeColor = System::Drawing::SystemColors::HotTrack;
 			this->mnuCheckForUpdates->Name = L"mnuCheckForUpdates";
@@ -1370,7 +1407,7 @@ private: System::Windows::Forms::ToolStripMenuItem^  mnuAllowGunnerHelms;
 			// 
 			// grpGSkillFilters
 			// 
-			this->grpGSkillFilters->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom) 
+			this->grpGSkillFilters->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
 				| System::Windows::Forms::AnchorStyles::Left));
 			this->grpGSkillFilters->Location = System::Drawing::Point(195, 8);
 			this->grpGSkillFilters->Name = L"grpGSkillFilters";
@@ -1381,7 +1418,7 @@ private: System::Windows::Forms::ToolStripMenuItem^  mnuAllowGunnerHelms;
 			// 
 			// grpGSkills
 			// 
-			this->grpGSkills->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom) 
+			this->grpGSkills->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom)
 				| System::Windows::Forms::AnchorStyles::Left));
 			this->grpGSkills->Location = System::Drawing::Point(6, 8);
 			this->grpGSkills->Name = L"grpGSkills";
@@ -1404,11 +1441,11 @@ private: System::Windows::Forms::ToolStripMenuItem^  mnuAllowGunnerHelms;
 			// 
 			// cmbFilterByExtraSkill
 			// 
-			this->cmbFilterByExtraSkill->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left) 
+			this->cmbFilterByExtraSkill->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
 			this->cmbFilterByExtraSkill->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
 			this->cmbFilterByExtraSkill->FormattingEnabled = true;
-			this->cmbFilterByExtraSkill->Items->AddRange(gcnew cli::array< System::Object^  >(1) {L"No extra skill filtering"});
+			this->cmbFilterByExtraSkill->Items->AddRange(gcnew cli::array< System::Object^  >(1) { L"No extra skill filtering" });
 			this->cmbFilterByExtraSkill->Location = System::Drawing::Point(6, 70);
 			this->cmbFilterByExtraSkill->Name = L"cmbFilterByExtraSkill";
 			this->cmbFilterByExtraSkill->Size = System::Drawing::Size(181, 21);
@@ -1417,11 +1454,11 @@ private: System::Windows::Forms::ToolStripMenuItem^  mnuAllowGunnerHelms;
 			// 
 			// cmbCharms
 			// 
-			this->cmbCharms->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left) 
+			this->cmbCharms->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
 			this->cmbCharms->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
 			this->cmbCharms->FormattingEnabled = true;
-			this->cmbCharms->Items->AddRange(gcnew cli::array< System::Object^  >(2) {L"None", L"All"});
+			this->cmbCharms->Items->AddRange(gcnew cli::array< System::Object^  >(2) { L"None", L"All" });
 			this->cmbCharms->Location = System::Drawing::Point(6, 43);
 			this->cmbCharms->Name = L"cmbCharms";
 			this->cmbCharms->Size = System::Drawing::Size(181, 21);
@@ -1430,12 +1467,14 @@ private: System::Windows::Forms::ToolStripMenuItem^  mnuAllowGunnerHelms;
 			// 
 			// cmbSort
 			// 
-			this->cmbSort->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left) 
+			this->cmbSort->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
 			this->cmbSort->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
 			this->cmbSort->FormattingEnabled = true;
-			this->cmbSort->Items->AddRange(gcnew cli::array< System::Object^  >(13) {L"None", L"Dragon res", L"Fire res", L"Ice res", 
-				L"Thunder res", L"Water res", L"Base defence", L"Max defence", L"Difficulty", L"Rarity", L"Slots spare", L"Family", L"Extra Skills"});
+			this->cmbSort->Items->AddRange(gcnew cli::array< System::Object^  >(13) {
+				L"None", L"Dragon res", L"Fire res", L"Ice res",
+					L"Thunder res", L"Water res", L"Base defence", L"Max defence", L"Difficulty", L"Rarity", L"Slots spare", L"Family", L"Extra Skills"
+			});
 			this->cmbSort->Location = System::Drawing::Point(6, 16);
 			this->cmbSort->Name = L"cmbSort";
 			this->cmbSort->Size = System::Drawing::Size(181, 21);
@@ -1466,13 +1505,15 @@ private: System::Windows::Forms::ToolStripMenuItem^  mnuAllowGunnerHelms;
 			// 
 			// cmbCharmSelect
 			// 
-			this->cmbCharmSelect->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left) 
+			this->cmbCharmSelect->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left)
 				| System::Windows::Forms::AnchorStyles::Right));
 			this->cmbCharmSelect->ContextMenuStrip = this->cmsCharms;
 			this->cmbCharmSelect->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
 			this->cmbCharmSelect->FormattingEnabled = true;
-			this->cmbCharmSelect->Items->AddRange(gcnew cli::array< System::Object^  >(5) {L"Use no charms", L"Use my charms", L"Use only slotted charms", 
-				L"Use up to one skill charms", L"Use up to two skill charms"});
+			this->cmbCharmSelect->Items->AddRange(gcnew cli::array< System::Object^  >(5) {
+				L"Use no charms", L"Use my charms", L"Use only slotted charms",
+					L"Use up to one skill charms", L"Use up to two skill charms"
+			});
 			this->cmbCharmSelect->Location = System::Drawing::Point(6, 19);
 			this->cmbCharmSelect->Name = L"cmbCharmSelect";
 			this->cmbCharmSelect->Size = System::Drawing::Size(181, 21);
@@ -1483,31 +1524,12 @@ private: System::Windows::Forms::ToolStripMenuItem^  mnuAllowGunnerHelms;
 			this->cmsCharms->Name = L"cmsCharms";
 			this->cmsCharms->Size = System::Drawing::Size(61, 4);
 			// 
-			// nudHR
+			// setDesignerToolStripMenuItem
 			// 
-			this->nudHR->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Right));
-			this->nudHR->BackColor = System::Drawing::SystemColors::Control;
-			this->nudHR->Location = System::Drawing::Point(100, 20);
-			this->nudHR->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {12, 0, 0, 0});
-			this->nudHR->Minimum = System::Decimal(gcnew cli::array< System::Int32 >(4) {1, 0, 0, 0});
-			this->nudHR->Name = L"nudHR";
-			this->nudHR->Size = System::Drawing::Size(44, 20);
-			this->nudHR->TabIndex = 1;
-			this->nudHR->TextAlign = System::Windows::Forms::HorizontalAlignment::Center;
-			this->nudHR->Value = System::Decimal(gcnew cli::array< System::Int32 >(4) {12, 0, 0, 0});
-			// 
-			// nudElder
-			// 
-			this->nudElder->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Right));
-			this->nudElder->BackColor = System::Drawing::SystemColors::Control;
-			this->nudElder->Location = System::Drawing::Point(100, 50);
-			this->nudElder->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {10, 0, 0, 0});
-			this->nudElder->Minimum = System::Decimal(gcnew cli::array< System::Int32 >(4) {1, 0, 0, 0});
-			this->nudElder->Name = L"nudElder";
-			this->nudElder->Size = System::Drawing::Size(44, 20);
-			this->nudElder->TabIndex = 3;
-			this->nudElder->TextAlign = System::Windows::Forms::HorizontalAlignment::Center;
-			this->nudElder->Value = System::Decimal(gcnew cli::array< System::Int32 >(4) {10, 0, 0, 0});
+			this->setDesignerToolStripMenuItem->Name = L"setDesignerToolStripMenuItem";
+			this->setDesignerToolStripMenuItem->Size = System::Drawing::Size(84, 20);
+			this->setDesignerToolStripMenuItem->Text = L"Set Designer";
+			this->setDesignerToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::setDesignerToolStripMenuItem_Click);
 			// 
 			// Form1
 			// 
@@ -1523,12 +1545,14 @@ private: System::Windows::Forms::ToolStripMenuItem^  mnuAllowGunnerHelms;
 			this->Controls->Add(this->tabHunterType);
 			this->Controls->Add(this->groupBox4);
 			this->Controls->Add(this->progressBar1);
-			this->Icon = (cli::safe_cast<System::Drawing::Icon^  >(resources->GetObject(L"$this.Icon")));
+			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->Name = L"Form1";
 			this->Text = L"Athena\'s ASS for MH4G and MH4U";
 			this->groupBox1->ResumeLayout(false);
 			this->groupBox1->PerformLayout();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudWeaponSlots))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->nudWeaponSlots))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->nudHR))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->nudElder))->EndInit();
 			this->groupBox4->ResumeLayout(false);
 			this->grpResults->ResumeLayout(false);
 			this->menuStrip1->ResumeLayout(false);
@@ -1540,8 +1564,6 @@ private: System::Windows::Forms::ToolStripMenuItem^  mnuAllowGunnerHelms;
 			this->tabGunner->ResumeLayout(false);
 			this->grpSortFilter->ResumeLayout(false);
 			this->grpCharms->ResumeLayout(false);
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudHR))->EndInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->nudElder))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
@@ -2070,23 +2092,44 @@ private:
 				sb.AppendLine( dash );
 				offset++;
 				Generic::Dictionary< Decoration^, unsigned > deco_dict;
-				for each( Decoration^ decoration in solution->decorations )
-				{
-					if( !deco_dict.ContainsKey( decoration ) )
-						deco_dict.Add( decoration, 1 );
-					else deco_dict[ decoration ]++;
-				}
-				Generic::Dictionary< Decoration^, unsigned >::Enumerator iter = deco_dict.GetEnumerator();
-				while( iter.MoveNext() )
-				{
-					sb.Append( Convert::ToString( iter.Current.Value ) )->Append( L"x " );
-					if( mnuPrintDecoNames->Checked )
-						sb.AppendLine( iter.Current.Key->name );
-					else
+				bool use_torso = solution->torso_multiplier > 1;
+				int num_loops = use_torso ? 2 : 1;
+				List_t<Decoration^>^ workingList = use_torso ? %solution->body_decorations : %solution->decorations;
+				// Adding torso up decoration display
+				for (int i = 0; i < num_loops; i++) {
+					deco_dict.Clear();
+					
+					for each(Decoration^ decoration in workingList)
 					{
-						sb.AppendLine( FormatString2( JewelFormat, L"+" + Convert::ToString( iter.Current.Key->abilities[ 0 ]->amount ), iter.Current.Key->abilities[ 0 ]->ability->name ) );
+						if (!deco_dict.ContainsKey(decoration))
+							deco_dict.Add(decoration, 1);
+						else deco_dict[decoration]++;
 					}
-					offset++;
+					Generic::Dictionary< Decoration^, unsigned >::Enumerator iter = deco_dict.GetEnumerator();
+					while (iter.MoveNext())
+					{
+						sb.Append(Convert::ToString(iter.Current.Value))->Append(L"x ");
+						if (mnuPrintDecoNames->Checked)
+							sb.Append(iter.Current.Key->name);
+						else
+						{
+							sb.Append(FormatString2(JewelFormat, L"+" + Convert::ToString(iter.Current.Key->abilities[0]->amount), iter.Current.Key->abilities[0]->ability->name));
+						}
+						if (i == 0 && use_torso) {
+							sb.AppendLine(L" " + StaticString(DecorationInTorso));
+						}
+						else 
+						{
+							sb.AppendLine(L"");
+						}
+						offset++;
+					}
+
+					if (use_torso) {
+						// Hacky, but it works
+						use_torso = false;
+						workingList = %solution->non_body_decorations;
+					}
 				}
 			}
 			if( solution->total_slots_spare > 0 || cmbSort->SelectedIndex == 10 )
@@ -2862,8 +2905,19 @@ private:
 		{
 			if( str->Substring( 1, 2 ) == L"x " || str->Substring( 2, 2 ) == L"x " )
 			{
-				String^ deco_name = str->Substring( str->IndexOf( L' ' ) + 1 );
-				Decoration^ decoration = Decoration::FindDecoration( deco_name );
+				// Need to add a check for torso up to avoid errors
+				int spcPos = str->IndexOf(L' ');
+				int torsoPos = str->IndexOf(StaticString(DecorationInTorso));
+				String^ deco_name;
+				if (torsoPos >= 0) 
+				{
+					deco_name = str->Substring(spcPos + 1, torsoPos - spcPos - 2);
+				}
+				else
+				{
+					deco_name = str->Substring(spcPos + 1);
+				}
+				Decoration^ decoration = Decoration::FindDecoration(deco_name);
 				if( decoration )
 				{
 					Utility::UpdateContextMenu( cmsSolutions, decoration );
@@ -3150,5 +3204,9 @@ private:
 		this->Close();
 	}
 	
+private: System::Void setDesignerToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
+	SetDesigner^ designer = gcnew SetDesigner(nullptr);
+	designer->ShowDialog();
+}
 };
 }
